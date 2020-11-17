@@ -7,5 +7,6 @@ namespace TheStore.test
 {
     public class Class
     {
+        private string name;
     }
 }

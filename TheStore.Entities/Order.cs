@@ -4,7 +4,13 @@ using System.Text;
 
 namespace TheStore.Entities
 {
-    class Order
+    public class Order
     {
+        public int Id { get; set; }
+        public Customer Customer { get; set; }
+        public int CustomerId { get; set; }
+        public Seller Seller { get; set; }
+        public int SellerId { get; set; }
+        public DateTime OrderedDate { get; set; }
     }
 }

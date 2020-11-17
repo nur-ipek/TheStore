@@ -14,6 +14,8 @@ namespace TheStore.Entities
         public MembershipType MembershipType { get; set; }
         public int MembershipTypeId { get; set; }
 
+        public virtual ICollection<Product> Products { get; set; }
+
 
 
     }

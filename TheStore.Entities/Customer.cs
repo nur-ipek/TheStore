@@ -15,7 +15,9 @@ namespace TheStore.Entities
         public DateTime Birthdate{ get; set; }
         public City City { get; set; }
         public int CityId{ get; set; }
+        public virtual ICollection<Order> Order { get; set; }
 
+        public Seller Seller { get; set; }
 
 
     }

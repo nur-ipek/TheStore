@@ -12,5 +12,7 @@ namespace TheStore.Entities
         public Seller Seller { get; set; }
         public int SellerId { get; set; }
         public DateTime OrderedDate { get; set; }
+
+        public ICollection<OrderDetail> OrderDetails { get; set; }
     }
 }

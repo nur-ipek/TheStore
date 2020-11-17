@@ -15,5 +15,10 @@ namespace TheStore.Entities
         public int Stock { get; set; }
         public int BodySize { get; set; }
 
+        public int SellerId { get; set; }
+        public Seller Seller { get; set; }
+
+        public ICollection<OrderDetail> OrderDetails { get; set; }
+
     }
 }

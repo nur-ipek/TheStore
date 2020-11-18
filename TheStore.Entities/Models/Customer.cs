@@ -17,7 +17,7 @@ namespace TheStore.Core.Models
         public int CityId{ get; set; }
         public virtual ICollection<Order> Order { get; set; }
         public Seller Seller { get; set; }
-        public int isActive { get; set; }
+        public int IsActive { get; set; }
 
 
     }

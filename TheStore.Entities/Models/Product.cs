@@ -20,7 +20,7 @@ namespace TheStore.Core.Models
         public virtual Seller Seller { get; set; }
 
         public ICollection<OrderDetail> OrderDetails { get; set; }
-        public int isDelete { get; set; }
+        public int IsDelete { get; set; }
 
     }
 }

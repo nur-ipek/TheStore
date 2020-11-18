@@ -17,6 +17,8 @@ namespace TheStore.Core.Models
 
         public virtual ICollection<Product> Products { get; set; }
 
+        public Order Order { get; set; }
+
 
 
     }

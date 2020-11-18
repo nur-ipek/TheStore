@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace TheStore.Entities
+namespace TheStore.Core.Models
 {
     public class Town
     {

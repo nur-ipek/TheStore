@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30204.135
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheStore.WepApp", "TheStore\TheStore.WepApp.csproj", "{14B5C3A9-9F1B-400F-AC0B-A5211AD59380}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheStore.Web", "TheStore\TheStore.Web.csproj", "{14B5C3A9-9F1B-400F-AC0B-A5211AD59380}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheStore.Entities", "TheStore.Entities\TheStore.Entities.csproj", "{770F2DA8-6538-4938-8BA8-4C202286DD67}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheStore.Core", "TheStore.Entities\TheStore.Core.csproj", "{770F2DA8-6538-4938-8BA8-4C202286DD67}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheStore.DAL", "TheStore.DAL\TheStore.DAL.csproj", "{1F03620E-7B74-47CF-84D5-9929FBD3A336}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheStore.Data", "TheStore.DAL\TheStore.Data.csproj", "{1F03620E-7B74-47CF-84D5-9929FBD3A336}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TheStore.BLL", "TheStore.BLL\TheStore.BLL.csproj", "{3DE6DF4A-BCD6-43C5-86C0-70037618EA55}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheStore.Service", "TheStore.BLL\TheStore.Service.csproj", "{3DE6DF4A-BCD6-43C5-86C0-70037618EA55}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

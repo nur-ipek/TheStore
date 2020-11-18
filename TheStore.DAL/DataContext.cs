@@ -2,7 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
-using TheStore.Entities;
+using TheStore.Core.Models;
+using TheStore.Data.Configurations;
 
 namespace TheStore.DAL.Concrete.EF
 {
@@ -15,7 +16,8 @@ namespace TheStore.DAL.Concrete.EF
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-
+            modelBuilder.ApplyConfiguration(new ProductConfiguration());
+            modelBuilder.Entity<OrderDetail>().HasNoKey();
         }
 
         public DbSet<City> Cities { get; set; }

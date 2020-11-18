@@ -25,10 +25,18 @@ namespace TheStore
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<DataContext>(options =>
+            {
+                options.UseSqlServer(Configuration["ConnectionStrings:TheStoreDatabase"].ToString(), o =>
+                 {
+                     o.MigrationsAssembly("TheStore.Data");
+                 }
+                );
+            });
             services.AddControllersWithViews();
 
-            services.AddDbContext<DataContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("TheStoreDatabase")));
+            //services.AddDbContext<DataContext>(options =>
+            //options.UseSqlServer(Configuration.GetConnectionString("TheStoreDatabase")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

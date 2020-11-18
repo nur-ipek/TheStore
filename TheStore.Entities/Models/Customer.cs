@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace TheStore.Entities
+namespace TheStore.Core.Models
 {
     public class Customer
     {
@@ -16,8 +16,8 @@ namespace TheStore.Entities
         public City City { get; set; }
         public int CityId{ get; set; }
         public virtual ICollection<Order> Order { get; set; }
-
         public Seller Seller { get; set; }
+        public int isActive { get; set; }
 
 
     }

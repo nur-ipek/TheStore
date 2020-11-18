@@ -1,6 +1,6 @@
 ﻿
 
-namespace TheStore.Entities
+namespace TheStore.Core.Models
 {
     public class MembershipType
     {

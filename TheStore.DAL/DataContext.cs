@@ -23,7 +23,6 @@ namespace TheStore.DAL.Concrete.EF
                 .HasOne(p => p.Order)
                 .WithMany(w => w.OrderDetails)
                 .HasForeignKey(f => f.OrderId);
-                //.OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<Product>()
                 .Property(b => b.UnitPrice).HasColumnType("decimal");
@@ -32,13 +31,17 @@ namespace TheStore.DAL.Concrete.EF
                 .HasOne(p => p.Seller)
                 .WithOne(s => s.Order)
                 .HasForeignKey<Order>(l => l.SellerId);
-                //.OnDelete(DeleteBehavior.NoAction);
 
             modelBuilder.Entity<Order>()
                 .HasOne(p => p.Customer)
-                .WithMany(w => w.Order)
-                .HasForeignKey(f => f.CustomerId)
-                .OnDelete(DeleteBehavior.NoAction);
+                .WithMany(w => w.Orders)
+                .HasForeignKey(f => f.CustomerId);
+
+            modelBuilder.Entity<Town>()
+                .HasOne(p => p.City)
+                .WithMany(w => w.Towns)
+                .HasForeignKey(f => f.CityId);
+                
 
             foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
             {

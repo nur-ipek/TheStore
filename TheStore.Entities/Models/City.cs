@@ -9,9 +9,9 @@ namespace TheStore.Core.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public virtual Town Town { get; set; }
-        public int TownId { get; set; }
+        public virtual ICollection<Town> Towns { get; set; }
+        public virtual ICollection<Customer> Customers { get; set; }
 
-        public Customer Customer { get; set; }
+        public virtual ICollection<Seller> Sellers { get; set; }
     }
 }

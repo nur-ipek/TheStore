@@ -6,7 +6,7 @@ using System.Text;
 using TheStore.Core.Models;
 using TheStore.Data.Configurations;
 
-namespace TheStore.DAL.Concrete.EF
+namespace TheStore.Data
 {
     public class DataContext : DbContext
     {
@@ -48,6 +48,7 @@ namespace TheStore.DAL.Concrete.EF
                 relationship.DeleteBehavior = DeleteBehavior.Restrict;
             }
 
+            
             base.OnModelCreating(modelBuilder);
 
         }

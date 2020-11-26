@@ -9,7 +9,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using TheStore.DAL.Concrete.EF;
+using TheStore.Core.UnitOfWorks;
+using TheStore.Data;
+using TheStore.Data.UnitOfWorks;
 
 namespace TheStore
 {
@@ -33,6 +35,8 @@ namespace TheStore
                  }
                 );
             });
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+
             services.AddControllersWithViews();
 
             //services.AddDbContext<DataContext>(options =>

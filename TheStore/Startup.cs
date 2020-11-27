@@ -34,6 +34,8 @@ namespace TheStore
                      o.MigrationsAssembly("TheStore.Data");
                  }
                 );
+
+                options.EnableSensitiveDataLogging();
             });
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 

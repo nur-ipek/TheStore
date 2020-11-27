@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using TheStore.Core.Services;
 using TheStore.Models;
 
 namespace TheStore.Controllers
@@ -12,15 +13,15 @@ namespace TheStore.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly IService<HomeController> _service;
+        public HomeController(ILogger<HomeController> logger, IService<HomeController> service)
         {
             _logger = logger;
+            _service = service;
         }
 
         public IActionResult Index()
         {
-            int i = 2;
             return View();
         }
 

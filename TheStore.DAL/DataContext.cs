@@ -48,7 +48,7 @@ namespace TheStore.Data
                 relationship.DeleteBehavior = DeleteBehavior.Restrict;
             }
 
-            
+            modelBuilder.Seed();
             base.OnModelCreating(modelBuilder);
 
         }

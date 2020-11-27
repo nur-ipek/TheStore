@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
 using TheStore.Core.Repositories;
 using TheStore.Core.Services;
@@ -24,18 +23,19 @@ namespace TheStore.Service.Services
             await _repository.AddAsync(entity);
 
             await _unitOfWork.CommitAsync();
-
-            
         }
 
-        public Task<IEnumerable<TEntity>> AddRangeAsync(IEnumerable<TEntity> entities)
+        public async Task<IEnumerable<TEntity>> AddRangeAsync(IEnumerable<TEntity> entities)
         {
-            throw new NotImplementedException();
+            await _repository.AddRangeAsync(entities);
+            await _unitOfWork.CommitAsync();
+
+            return entities;
         }
 
         public Task<IEnumerable<TEntity>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return _repository.GetAllAsync();
         }
 
         public Task<TEntity> GetByIdAsync(int id)

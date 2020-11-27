@@ -1,5 +1,7 @@
 ﻿
 
+using System.ComponentModel.DataAnnotations;
+
 namespace TheStore.Core.Models
 {
     public class MembershipType

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TheStore.Data;
 
 namespace TheStore.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20201126202252_SeedMembershipType")]
+    partial class SeedMembershipType
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -27,25 +29,11 @@ namespace TheStore.Data.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(15)")
-                        .HasMaxLength(15);
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.ToTable("Cities");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Adana"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Adıyaman"
-                        });
                 });
 
             modelBuilder.Entity("TheStore.Core.Models.Customer", b =>
@@ -56,9 +44,7 @@ namespace TheStore.Data.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("Birthdate")
                         .HasColumnType("datetime2");
@@ -67,57 +53,25 @@ namespace TheStore.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(15)")
-                        .HasMaxLength(15);
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
+                    b.Property<int>("IsActive")
+                        .HasColumnType("int");
 
                     b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(15)")
-                        .HasMaxLength(15);
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<long>("PhoneNumber")
-                        .HasColumnType("bigint");
+                    b.Property<int>("PhoneNumber")
+                        .HasColumnType("int");
 
                     b.Property<string>("UserName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(15)")
-                        .HasMaxLength(15);
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CityId");
 
                     b.ToTable("Customers");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Address = "Bilmem Mah. Bilmem Sk.",
-                            Birthdate = new DateTime(1996, 1, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CityId = 1,
-                            FirstName = "Burak",
-                            IsActive = true,
-                            LastName = "Akkaya",
-                            PhoneNumber = 5457778899L,
-                            UserName = "akkayaburak"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Address = "Bilmem Mah. Bilmem Sk.",
-                            Birthdate = new DateTime(1997, 10, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            CityId = 2,
-                            FirstName = "Nur İpek",
-                            IsActive = true,
-                            LastName = "Yılmaz",
-                            PhoneNumber = 5368887755L,
-                            UserName = "ipekyilmaz"
-                        });
                 });
 
             modelBuilder.Entity("TheStore.Core.Models.MembershipType", b =>
@@ -165,7 +119,7 @@ namespace TheStore.Data.Migrations
                     b.Property<DateTime>("OrderedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("SellerId")
+                    b.Property<int>("SellerId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -173,26 +127,9 @@ namespace TheStore.Data.Migrations
                     b.HasIndex("CustomerId");
 
                     b.HasIndex("SellerId")
-                        .IsUnique()
-                        .HasFilter("[SellerId] IS NOT NULL");
+                        .IsUnique();
 
                     b.ToTable("Orders");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CustomerId = 1,
-                            OrderedDate = new DateTime(2020, 11, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            SellerId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CustomerId = 2,
-                            OrderedDate = new DateTime(2020, 11, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            SellerId = 2
-                        });
                 });
 
             modelBuilder.Entity("TheStore.Core.Models.OrderDetail", b =>
@@ -202,10 +139,10 @@ namespace TheStore.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("OrderId")
+                    b.Property<int>("OrderId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("ProductId")
+                    b.Property<int>("ProductId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -215,14 +152,6 @@ namespace TheStore.Data.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("OrderDetails");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            OrderId = 1,
-                            ProductId = 1
-                        });
                 });
 
             modelBuilder.Entity("TheStore.Core.Models.Product", b =>
@@ -238,22 +167,18 @@ namespace TheStore.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsDelete")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
-
-                    b.Property<int?>("ProductTypeId")
+                    b.Property<int>("IsDelete")
                         .HasColumnType("int");
 
-                    b.Property<int?>("SellerId")
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ProductTypeId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SellerId")
                         .HasColumnType("int");
 
                     b.Property<int>("Stock")
@@ -269,32 +194,6 @@ namespace TheStore.Data.Migrations
                     b.HasIndex("SellerId");
 
                     b.ToTable("Products");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            BodySize = 33,
-                            Description = "New season 2020 Autumn",
-                            IsDelete = false,
-                            Name = "New style jean",
-                            ProductTypeId = 2,
-                            SellerId = 1,
-                            Stock = 10,
-                            UnitPrice = 200m
-                        },
-                        new
-                        {
-                            Id = 2,
-                            BodySize = 20,
-                            Description = "New season 2020 Autumn",
-                            IsDelete = false,
-                            Name = "V-neck t-shirt",
-                            ProductTypeId = 1,
-                            SellerId = 1,
-                            Stock = 20,
-                            UnitPrice = 70m
-                        });
                 });
 
             modelBuilder.Entity("TheStore.Core.Models.ProductType", b =>
@@ -305,25 +204,11 @@ namespace TheStore.Data.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(25)")
-                        .HasMaxLength(25);
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.ToTable("ProductTypes");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "T-Shirt"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Jean"
-                        });
                 });
 
             modelBuilder.Entity("TheStore.Core.Models.Seller", b =>
@@ -334,37 +219,28 @@ namespace TheStore.Data.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Adress")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("CityId")
                         .HasColumnType("int");
 
                     b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(15)")
-                        .HasMaxLength(15);
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<long>("IdentityNumber")
-                        .HasColumnType("bigint")
-                        .HasMaxLength(11);
+                    b.Property<int>("IdentityNumber")
+                        .HasColumnType("int");
 
                     b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(15)")
-                        .HasMaxLength(15);
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("MembershipTypeId")
                         .HasColumnType("int");
 
-                    b.Property<long>("PhoneNumber")
-                        .HasColumnType("bigint");
+                    b.Property<int>("PhoneNumber")
+                        .HasColumnType("int");
 
                     b.Property<string>("StoreName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(15)")
-                        .HasMaxLength(15);
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -373,32 +249,6 @@ namespace TheStore.Data.Migrations
                     b.HasIndex("MembershipTypeId");
 
                     b.ToTable("Sellers");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Adress = "Bilmem Mah. Bilmem Sk.",
-                            CityId = 1,
-                            FirstName = "Ali",
-                            IdentityNumber = 11111111111L,
-                            LastName = "Koçak",
-                            MembershipTypeId = 1,
-                            PhoneNumber = 5554448866L,
-                            StoreName = "Kardeşler"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Adress = "Bilmem Mah. Bilmem Sk.",
-                            CityId = 2,
-                            FirstName = "Veli",
-                            IdentityNumber = 11111111112L,
-                            LastName = "Kara",
-                            MembershipTypeId = 1,
-                            PhoneNumber = 5445551122L,
-                            StoreName = "Karalar"
-                        });
                 });
 
             modelBuilder.Entity("TheStore.Core.Models.Town", b =>
@@ -412,29 +262,13 @@ namespace TheStore.Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(50)")
-                        .HasMaxLength(50);
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CityId");
 
                     b.ToTable("Towns");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CityId = 2,
-                            Name = "Çelikhan"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CityId = 1,
-                            Name = "Çukurova"
-                        });
                 });
 
             modelBuilder.Entity("TheStore.Core.Models.Customer", b =>
@@ -457,7 +291,8 @@ namespace TheStore.Data.Migrations
                     b.HasOne("TheStore.Core.Models.Seller", "Seller")
                         .WithOne("Order")
                         .HasForeignKey("TheStore.Core.Models.Order", "SellerId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("TheStore.Core.Models.OrderDetail", b =>
@@ -465,12 +300,14 @@ namespace TheStore.Data.Migrations
                     b.HasOne("TheStore.Core.Models.Order", "Order")
                         .WithMany("OrderDetails")
                         .HasForeignKey("OrderId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("TheStore.Core.Models.Product", "Product")
                         .WithMany("OrderDetails")
                         .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("TheStore.Core.Models.Product", b =>
@@ -478,12 +315,14 @@ namespace TheStore.Data.Migrations
                     b.HasOne("TheStore.Core.Models.ProductType", "ProductType")
                         .WithMany("Products")
                         .HasForeignKey("ProductTypeId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("TheStore.Core.Models.Seller", "Seller")
                         .WithMany("Products")
                         .HasForeignKey("SellerId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("TheStore.Core.Models.Seller", b =>

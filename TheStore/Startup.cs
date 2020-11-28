@@ -9,6 +9,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using TheStore.Core.Repositories;
+using TheStore.Core.Services;
 using TheStore.Core.UnitOfWorks;
 using TheStore.Data;
 using TheStore.Data.UnitOfWorks;
@@ -38,6 +40,8 @@ namespace TheStore
                 options.EnableSensitiveDataLogging();
             });
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped(typeof(IRepository<>), typeof(IRepository<>));
+            services.AddScoped(typeof(IService<>), typeof(Service.Services.Service<>));
 
             services.AddControllersWithViews();
 

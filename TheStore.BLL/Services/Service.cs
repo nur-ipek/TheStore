@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 using TheStore.Core.Repositories;
@@ -28,44 +29,53 @@ namespace TheStore.Service.Services
         public async Task<IEnumerable<TEntity>> AddRangeAsync(IEnumerable<TEntity> entities)
         {
             await _repository.AddRangeAsync(entities);
+
             await _unitOfWork.CommitAsync();
 
             return entities;
         }
 
-        public Task<IEnumerable<TEntity>> GetAllAsync()
+        public async Task<IEnumerable<TEntity>> GetAllAsync()
         {
-            return _repository.GetAllAsync();
+            return await _repository.GetAllAsync();
         }
 
-        public Task<TEntity> GetByIdAsync(int id)
+        public async Task<TEntity> GetByIdAsync(int id)
         {
-            throw new NotImplementedException();
+            return await _repository.GetByIdAsync(id);
         }
 
         public void Remove(TEntity entity)
         {
-            throw new NotImplementedException();
+            _repository.Remove(entity);
+
+            _unitOfWork.Commit(); 
         }
 
         public void RemoveRange(IEnumerable<TEntity> entities)
         {
-            throw new NotImplementedException();
+            _repository.RemoveRange(entities);
+
+            _unitOfWork.Commit();
         }
 
-        public Task<TEntity> SingleOrDefaultAsync(Expression<Func<TEntity, bool>> predicate)
+        public async Task<TEntity> SingleOrDefaultAsync(Expression<Func<TEntity, bool>> predicate)
         {
-            throw new NotImplementedException();
+            return await _repository.SingleOrDefaultAsync(predicate);
         }
 
         public TEntity Update(TEntity entity)
         {
-            throw new NotImplementedException();
+            TEntity updateEntity = _repository.Update(entity);
+
+            _unitOfWork.Commit();
+
+            return updateEntity;
         }
 
-        public Task<IEnumerable<TEntity>> Where(Expression<Func<TEntity, bool>> predicate)
+        public async Task<IEnumerable<TEntity>> Where(Expression<Func<TEntity, bool>> predicate)
         {
-            throw new NotImplementedException();
+            return await _repository.Where(predicate);
         }
     }
 }
